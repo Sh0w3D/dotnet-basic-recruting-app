@@ -1,4 +1,4 @@
-using MatchDataManager.Domain.Models;
+using MatchDataManager.Domain.Entities;
 using MatchDataManager.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
