@@ -22,8 +22,7 @@ public class ErrorsController : ControllerBase
             IBaseException baseException => (
                 (int)baseException.StatusCode,
                 baseException.Message,
-                null
-            ),
+                null),
             _ => (StatusCodes.Status500InternalServerError,
             ErrorMessages.SharedExceptions.SharedUnexpectedErrorMessage,
             null),

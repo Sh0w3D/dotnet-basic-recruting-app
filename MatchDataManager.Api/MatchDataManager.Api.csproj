@@ -17,6 +17,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\MatchDataManager.Application\MatchDataManager.Application.csproj" />
+      <ProjectReference Include="..\MatchDataManager.Contracts\MatchDataManager.Contracts.csproj" />
       <ProjectReference Include="..\MatchDataManager.Domain\MatchDataManager.Domain.csproj" />
       <ProjectReference Include="..\MatchDataManager.Infrastructure\MatchDataManager.Infrastructure.csproj" />
     </ItemGroup>

@@ -11,7 +11,7 @@ public static class ConfigureServices
         services.AddSwaggerGen();
 
         services.AddSingleton<ProblemDetailsFactory, MatchDataManagerProblemDetailsFactory>();
-        
+
         services.AddControllers();
         return services;
     }

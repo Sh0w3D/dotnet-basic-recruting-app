@@ -11,7 +11,7 @@ public class TeamConfiguration : IEntityTypeConfiguration<Team>
         builder.ToTable("Teams");
 
         builder.HasKey(p => p.Id);
-        
+
         builder.HasIndex(p => p.Name)
             .IsUnique();
 

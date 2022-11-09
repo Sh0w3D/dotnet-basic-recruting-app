@@ -62,7 +62,7 @@ public class MatchDataManagerProblemDetailsFactory : ProblemDetailsFactory
         };
 
         if (title is not null) problemDetails.Title = title;
-        
+
         ApplyProblemDetailsDefaults(httpContext, problemDetails, statusCode.Value);
 
         return problemDetails;

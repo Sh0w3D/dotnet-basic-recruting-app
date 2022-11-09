@@ -49,9 +49,9 @@ public class LocationCommandRepository : ILocationCommandRepository
 
             await _context.SaveChangesAsync(cancellationToken);
         }
-        catch (NotFoundException ex)
+        catch (NotFoundException)
         {
-            throw ex;
+            throw;
         }
         catch (Exception ex)
         {
@@ -77,9 +77,9 @@ public class LocationCommandRepository : ILocationCommandRepository
             _context.Locations.Update(location);
             await _context.SaveChangesAsync(cancellationToken);
         }
-        catch (NotFoundException ex)
+        catch (NotFoundException)
         {
-            throw ex;
+            throw;
         }
         catch (Exception ex)
         {

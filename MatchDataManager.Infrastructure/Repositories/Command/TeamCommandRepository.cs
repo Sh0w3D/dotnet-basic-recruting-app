@@ -47,9 +47,9 @@ public class TeamCommandRepository : ITeamCommandRepository
             _context.Teams.Remove(toDelete);
             await _context.SaveChangesAsync(cancellationToken);
         }
-        catch (NotFoundException ex)
+        catch (NotFoundException)
         {
-            throw ex;
+            throw;
         }
         catch (Exception ex)
         {
@@ -73,9 +73,9 @@ public class TeamCommandRepository : ITeamCommandRepository
             _context.Teams.Update(teamEntity);
             await _context.SaveChangesAsync(cancellationToken);
         }
-        catch (NotFoundException ex)
+        catch (NotFoundException)
         {
-            throw ex;
+            throw;
         }
         catch (Exception ex)
         {

@@ -8,6 +8,10 @@ public interface ITeamQueryRepository
         Guid id,
         CancellationToken cancellationToken = default);
 
-    Task<IReadOnlyCollection<Team>> GetTeamsAsync(
+    Task<List<Team>> GetTeamsAsync(
+        CancellationToken cancellationToken = default);
+
+    Task<bool> UniqueNameAsync(
+        string name,
         CancellationToken cancellationToken = default);
 }

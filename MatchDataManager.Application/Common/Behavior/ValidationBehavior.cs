@@ -5,7 +5,7 @@ using MediatR;
 
 namespace MatchDataManager.Application.Common.Behavior;
 
-public class ValidationBehavior<TRequest, TResponse> : 
+public class ValidationBehavior<TRequest, TResponse> :
     IPipelineBehavior<TRequest, TResponse>
     where TRequest: IRequest<TResponse>
     where TResponse: class
