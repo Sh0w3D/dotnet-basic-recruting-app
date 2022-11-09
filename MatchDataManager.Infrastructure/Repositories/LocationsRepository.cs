@@ -1,6 +1,6 @@
-﻿using MatchDataManager.Api.Models;
+﻿using MatchDataManager.Domain.Models;
 
-namespace MatchDataManager.Api.Repositories;
+namespace MatchDataManager.Infrastructure.Repositories;
 
 public static class LocationsRepository
 {

@@ -1,5 +1,5 @@
-using MatchDataManager.Api.Models;
-using MatchDataManager.Api.Repositories;
+using MatchDataManager.Domain.Models;
+using MatchDataManager.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MatchDataManager.Api.Controllers;

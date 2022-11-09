@@ -9,4 +9,10 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\MatchDataManager.Application\MatchDataManager.Application.csproj" />
+      <ProjectReference Include="..\MatchDataManager.Domain\MatchDataManager.Domain.csproj" />
+      <ProjectReference Include="..\MatchDataManager.Infrastructure\MatchDataManager.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>
