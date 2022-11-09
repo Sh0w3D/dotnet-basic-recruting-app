@@ -1,3 +1,4 @@
+# Status check for project [![build](https://github.com/Sh0w3D/dotnet-basic-recruting-app/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Sh0w3D/dotnet-basic-recruting-app/actions/workflows/dotnet.yml)
 # Prerequisites
 This repository contains a code which you are supposed to work with. Please create a fork of this repo. As a result of your task please send us back a link to your github repository. While working with the code, please commit all changes to your repository, for us to check your progress.
 
