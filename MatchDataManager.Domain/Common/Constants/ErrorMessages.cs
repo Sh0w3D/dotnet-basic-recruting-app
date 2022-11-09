@@ -27,5 +27,6 @@ public static class ErrorMessages
         public const string SharedUnexpectedErrorMessage = "An unexpected error occurred.";
         public const string DatabaseSaveMessage = "An error occurred while saving data to database";
         public const string NotFoundMessage = "Requested data was not found";
+        public const string DatabaseInitializeErrorMessage = "An error occurred while initializing database";
     }
 }

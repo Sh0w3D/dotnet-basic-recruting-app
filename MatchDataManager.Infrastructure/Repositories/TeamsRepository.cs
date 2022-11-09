@@ -1,4 +1,4 @@
-﻿using MatchDataManager.Domain.Models;
+﻿using MatchDataManager.Domain.Entities;
 
 namespace MatchDataManager.Infrastructure.Repositories;
 

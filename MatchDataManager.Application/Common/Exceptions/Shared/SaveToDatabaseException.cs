@@ -20,6 +20,6 @@ public class SaveToDatabaseException : Exception, IBaseException
         StatusCode = HttpStatusCode.BadRequest;
     }
 
-    public string Message { get; }
+    public override string Message { get; }
     public HttpStatusCode StatusCode { get; }
 }

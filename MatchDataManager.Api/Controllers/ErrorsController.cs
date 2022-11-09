@@ -25,7 +25,7 @@ public class ErrorsController : ControllerBase
                 null
             ),
             _ => (StatusCodes.Status500InternalServerError,
-            SharedUnexpectedError: ErrorMessages.SharedExceptions.SharedUnexpectedErrorMessage,
+            ErrorMessages.SharedExceptions.SharedUnexpectedErrorMessage,
             null),
         };
 
@@ -34,8 +34,8 @@ public class ErrorsController : ControllerBase
                 statusCode: statusCode,
                 title: message)
             : ValidationProblem(
-                modelStateDictionary: CreateModelStateDictionary(errors),
-                title: message);
+                title: message,
+                modelStateDictionary: CreateModelStateDictionary(errors));
     }
 
     private static ModelStateDictionary CreateModelStateDictionary(IDictionary<string, string[]> errorsDictionary)
