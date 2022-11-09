@@ -4,7 +4,7 @@ using MatchDataManager.Domain.Common.Constants;
 
 namespace MatchDataManager.Application.Common.Exceptions.Shared;
 
-public class NotFoundException : IBaseException
+public class NotFoundException : Exception, IBaseException
 {
     public NotFoundException()
     {
@@ -12,6 +12,12 @@ public class NotFoundException : IBaseException
         Message = ErrorMessages.SharedExceptions.NotFoundMessage;
     }
 
+    public NotFoundException(string? message): base(message)
+    {
+        StatusCode = HttpStatusCode.NotFound;
+        Message = message ?? ErrorMessages.SharedExceptions.NotFoundMessage;
+    }
+
     public HttpStatusCode StatusCode { get; }
-    public string Message { get; }
+    public override string Message { get; }
 }

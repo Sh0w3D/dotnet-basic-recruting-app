@@ -12,7 +12,7 @@ public class MatchDataManagerValidationException : Exception, IBaseValidationExc
         StatusCode = HttpStatusCode.BadRequest;
     }
 
-    public string Message { get; }
+    public override string Message { get; }
     public HttpStatusCode StatusCode { get; }
     public IDictionary<string, string[]> Errors { get; }
 }
