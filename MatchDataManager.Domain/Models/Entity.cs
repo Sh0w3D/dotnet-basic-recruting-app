@@ -1,4 +1,4 @@
-﻿namespace MatchDataManager.Api.Models;
+﻿namespace MatchDataManager.Domain.Models;
 
 public abstract class Entity
 {
