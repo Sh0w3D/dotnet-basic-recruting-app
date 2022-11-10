@@ -1,5 +1,3 @@
-using FluentValidation.AspNetCore;
-
 namespace MatchDataManager.Api;
 
 public static class ConfigureServices
