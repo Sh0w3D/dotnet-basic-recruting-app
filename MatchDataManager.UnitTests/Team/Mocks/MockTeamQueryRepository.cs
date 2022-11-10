@@ -3,7 +3,7 @@ using Moq;
 
 namespace MatchDataManager.UnitTests.Team.Mocks;
 
-internal class MockTeamQueryRepository
+internal static class MockTeamQueryRepository
 {
     internal static ITeamQueryRepository GetTeamUniqueName(bool uniqueName)
     {
