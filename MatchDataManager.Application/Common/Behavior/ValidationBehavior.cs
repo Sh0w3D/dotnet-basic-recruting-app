@@ -5,10 +5,10 @@ using MediatR;
 
 namespace MatchDataManager.Application.Common.Behavior;
 
-public class ValidationBehavior<TRequest, TResponse> : 
+public class ValidationBehavior<TRequest, TResponse> :
     IPipelineBehavior<TRequest, TResponse>
-    where TRequest: IRequest<TResponse>
-    where TResponse: class
+        where TRequest : IRequest<TResponse>
+        where TResponse : class
 {
     private readonly IValidator<TRequest>? _validator;
 
@@ -19,77 +19,75 @@ public class ValidationBehavior<TRequest, TResponse> :
 
     public async Task<TResponse> Handle(
         TRequest request,
-        RequestHandlerDelegate<TResponse> next,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken,
+        RequestHandlerDelegate<TResponse> next)
     {
         if (_validator is null)
             return await next();
 
-        var validationResult = await _validator.ValidateAsync(request, cancellationToken);
+        var validationResult = await _validator
+            .ValidateAsync(request, cancellationToken);
 
         if (validationResult.IsValid)
             return await next();
 
         IDictionary<string, string[]> errors = new Dictionary<string, string[]>();
 
-        foreach (var error in validationResult.Errors)
+        foreach (var result in validationResult.Errors)
         {
-            if (error is null)
+            if (result is null)
                 continue;
 
-            if (errors.Count is not 0)
-                AppendErrorToDictionary(errors, error);
+            if (errors.Count != 0)
+                AppendErrorsToDictionary(errors, result);
             else
-                AppendNewErrorToDictionary(errors, error);
+                AddNewErrorToDictionary(errors, result);
         }
 
         throw new MatchDataManagerValidationException(errors);
     }
 
     /// <summary>
-    /// Adds new key with array of strings containing errors
+    /// Adding new Key and string array to the dictionary.
     /// </summary>
     /// <param name="errors"></param>
-    /// <param name="error"></param>
-    private static void AppendNewErrorToDictionary(
+    /// <param name="result"></param>
+    private static void AddNewErrorToDictionary(
         IDictionary<string, string[]> errors,
-        ValidationFailure error)
+        ValidationFailure result)
     {
-        var key = error.PropertyName;
-        var errorMessage = error.ErrorMessage;
-
-        errors.Add(key, new[] { errorMessage });
+        errors.Add(result.PropertyName, new string[] { result.ErrorMessage });
     }
 
     /// <summary>
-    /// Appends error to dictionary
-    /// if key of name error.PropertyName exists than call <see cref="AddErrorToExistingKey"/>
-    /// if key of name error.PropertyName does not exist then call <see cref="AppendNewErrorToDictionary"/>
+    /// Adding new Key and string array to the dictionary while the property name and error key is equals,
+    /// if the property name is not equal AddNewErrorToDictionary function is executed.
     /// </summary>
     /// <param name="errors"></param>
-    /// <param name="error"></param>
-    private static void AppendErrorToDictionary(
+    /// <param name="result"></param>
+    private static void AppendErrorsToDictionary(
         IDictionary<string, string[]> errors,
-        ValidationFailure error)
+        ValidationFailure result)
     {
-        if (errors.ContainsKey(error.PropertyName))
-            AddErrorToExistingKey(errors, error);
+        if (errors[result.PropertyName] is not null)
+            AddAdditionalErrorToProperty(errors, result);
         else
-            AppendNewErrorToDictionary(errors, error);
+            AddNewErrorToDictionary(errors, result);
     }
 
     /// <summary>
-    /// Adds new error to array where key equals error.PropertyName
+    /// Adding another error to the property that is having already validation error.
     /// </summary>
     /// <param name="errors"></param>
-    /// <param name="error"></param>
-    private static void AddErrorToExistingKey(
+    /// <param name="result"></param>
+    private static void AddAdditionalErrorToProperty(
         IDictionary<string, string[]> errors,
-        ValidationFailure error)
+        ValidationFailure result)
     {
-        ICollection<string> errorList = errors[error.PropertyName].ToList();
-        errorList.Add(error.ErrorMessage);
+        ICollection<string> errorList = errors[result.PropertyName].ToList();
 
-        errors[error.PropertyName] = errorList.ToArray();
+        errorList.Add(result.ErrorMessage);
+
+        errors[result.PropertyName] = errorList.ToArray();
     }
 }

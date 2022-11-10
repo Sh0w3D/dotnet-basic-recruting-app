@@ -9,6 +9,7 @@ namespace MatchDataManager.Api.Controllers;
 public class ErrorsController : ControllerBase
 {
     [Route("/error")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public IActionResult Error()
     {
         Exception? exception = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
@@ -22,8 +23,7 @@ public class ErrorsController : ControllerBase
             IBaseException baseException => (
                 (int)baseException.StatusCode,
                 baseException.Message,
-                null
-            ),
+                null),
             _ => (StatusCodes.Status500InternalServerError,
             ErrorMessages.SharedExceptions.SharedUnexpectedErrorMessage,
             null),

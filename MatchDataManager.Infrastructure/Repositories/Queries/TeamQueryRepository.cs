@@ -22,11 +22,25 @@ public class TeamQueryRepository : ITeamQueryRepository
             .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
-    public async Task<IReadOnlyCollection<Team>> GetTeamsAsync(
+    public async Task<List<Team>> GetTeamsAsync(
         CancellationToken cancellationToken = default)
     {
         return await _context.Teams
             .AsNoTracking()
             .ToListAsync(cancellationToken);
+    }
+
+    public async Task<bool> UniqueNameAsync(
+        string name,
+        CancellationToken cancellationToken = default)
+    {
+        // do not user StringComparison, it brakes query!
+        var teamEntity = await _context.Teams
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x =>
+                    string.Equals(x.Name.Trim().ToLower(), name.Trim().ToLower()),
+                cancellationToken);
+
+        return teamEntity is null;
     }
 }

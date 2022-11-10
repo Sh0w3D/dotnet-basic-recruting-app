@@ -49,9 +49,9 @@ public class LocationCommandRepository : ILocationCommandRepository
 
             await _context.SaveChangesAsync(cancellationToken);
         }
-        catch (NotFoundException ex)
+        catch (NotFoundException)
         {
-            throw ex;
+            throw new NotFoundException(nameof(DeleteLocationAsync));
         }
         catch (Exception ex)
         {
@@ -72,14 +72,14 @@ public class LocationCommandRepository : ILocationCommandRepository
                 throw new NotFoundException(nameof(UpdateLocationAsync));
 
             locationEntity.Name = location.Name;
-            location.City = location.City;
+            locationEntity.City = location.City;
 
-            _context.Locations.Update(location);
+            _context.Locations.Update(locationEntity);
             await _context.SaveChangesAsync(cancellationToken);
         }
-        catch (NotFoundException ex)
+        catch (NotFoundException)
         {
-            throw ex;
+            throw new NotFoundException(nameof(UpdateLocationAsync));
         }
         catch (Exception ex)
         {

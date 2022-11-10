@@ -31,21 +31,21 @@ public static class ConfigureServices
             provider => provider.GetRequiredService<ApplicationDbContext>());
 
         services.AddScoped<ApplicationDbContextInitializer>();
-        
+
         #endregion
 
         #region QueryRepository
 
         services.AddScoped<ILocationQueryRepository, LocationQueryRepository>();
         services.AddScoped<ITeamQueryRepository, TeamQueryRepository>();
-        
+
         #endregion
 
         #region CommandRepository
 
         services.AddScoped<ILocationCommandRepository, LocationCommandRepository>();
         services.AddScoped<ITeamCommandRepository, TeamCommandRepository>();
-        
+
         #endregion
 
         return services;

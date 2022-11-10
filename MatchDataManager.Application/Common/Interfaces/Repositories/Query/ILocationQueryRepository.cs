@@ -8,6 +8,10 @@ public interface ILocationQueryRepository
         Guid id,
         CancellationToken cancellationToken = default);
 
-    Task<IReadOnlyCollection<Location>> GetLocationsAsync(
+    Task<List<Location>> GetLocationsAsync(
+        CancellationToken cancellationToken = default);
+
+    Task<bool> UniqueNameAsync(
+        string name,
         CancellationToken cancellationToken = default);
 }

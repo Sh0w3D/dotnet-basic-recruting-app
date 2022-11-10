@@ -22,11 +22,25 @@ public class LocationQueryRepository : ILocationQueryRepository
             .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
     }
 
-    public async Task<IReadOnlyCollection<Location>> GetLocationsAsync(
+    public async Task<List<Location>> GetLocationsAsync(
         CancellationToken cancellationToken = default)
     {
         return await _context.Locations
             .AsNoTracking()
             .ToListAsync(cancellationToken);
+    }
+
+    public async Task<bool> UniqueNameAsync(
+        string name,
+        CancellationToken cancellationToken = default)
+    {
+        // do not user StringComparison, it brakes query!
+        var locationEntity = await _context.Locations
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x =>
+                    string.Equals(x.Name.Trim().ToLower(), name.Trim().ToLower()),
+                cancellationToken);
+
+        return locationEntity is null;
     }
 }
