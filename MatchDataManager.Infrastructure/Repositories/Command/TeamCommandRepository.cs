@@ -49,7 +49,7 @@ public class TeamCommandRepository : ITeamCommandRepository
         }
         catch (NotFoundException)
         {
-            throw;
+            throw new NotFoundException(nameof(DeleteTeamAsync));
         }
         catch (Exception ex)
         {
@@ -75,7 +75,7 @@ public class TeamCommandRepository : ITeamCommandRepository
         }
         catch (NotFoundException)
         {
-            throw;
+            throw new NotFoundException(nameof(UpdateTeamAsync));
         }
         catch (Exception ex)
         {

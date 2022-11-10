@@ -7,7 +7,8 @@ namespace MatchDataManager.Application.Locations.Command.UpdateLocation;
 public class UpdateLocationCommandHandler : IRequestHandler<UpdateLocationCommand>
 {
     private readonly ILocationCommandRepository _locationCommandRepository;
-    public UpdateLocationCommandHandler(ILocationCommandRepository locationCommandRepository)
+    public UpdateLocationCommandHandler(
+        ILocationCommandRepository locationCommandRepository)
     {
         _locationCommandRepository = locationCommandRepository;
     }

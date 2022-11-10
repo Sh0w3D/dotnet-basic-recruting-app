@@ -2,7 +2,7 @@ using FluentValidation;
 using MatchDataManager.Application.Common.Interfaces.Repositories.Query;
 using static MatchDataManager.Domain.Common.Constants.ErrorMessages;
 
-namespace MatchDataManager.Application.Teams.Command.Create;
+namespace MatchDataManager.Application.Teams.Command.CreateTeam;
 
 public class CreateTeamCommandValidator : AbstractValidator<CreateTeamCommand>
 {

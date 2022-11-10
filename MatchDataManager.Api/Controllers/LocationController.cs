@@ -12,8 +12,8 @@ namespace MatchDataManager.Api.Controllers;
 
 public class LocationController : ApiControllerBase
 {
-    [HttpGet("id:guid")]
-    public async Task<IActionResult> Get(Guid id)
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetLocationById(Guid id)
     {
         var result = await Mediator.Send(new GetLocationByIdQuery(id));
 
@@ -21,7 +21,7 @@ public class LocationController : ApiControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAllLocations()
     {
         var result = await Mediator.Send(new GetLocationsQuery());
 
@@ -29,20 +29,20 @@ public class LocationController : ApiControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateLocationRequest request)
+    public async Task<IActionResult> CreateLocation(CreateLocationRequest request)
     {
         var result = await Mediator.Send(new CreateLocationCommand(
             Name: request.Name,
             City: request.City));
 
         return CreatedAtAction(
-            nameof(Create),
+            nameof(CreateLocation),
             new { id = result.Id },
             ToLocationResponse(result));
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<IActionResult> Update(Guid id, UpdateLocationRequest request)
+    public async Task<IActionResult> UpdateLocation(Guid id, UpdateLocationRequest request)
     {
         await Mediator.Send(new UpdateLocationCommand(
             Id: id,
@@ -53,7 +53,7 @@ public class LocationController : ApiControllerBase
     }
 
     [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> Delete(Guid id)
+    public async Task<IActionResult> DeleteLocation(Guid id)
     {
         await Mediator.Send(new DeleteLocationCommand(id));
 

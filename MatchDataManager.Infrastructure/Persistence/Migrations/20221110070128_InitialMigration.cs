@@ -28,7 +28,7 @@ namespace MatchDataManager.Infrastructure.Persistence.Migrations
                 {
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
-                    CoachName = table.Column<string>(type: "TEXT", nullable: false)
+                    CoachName = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

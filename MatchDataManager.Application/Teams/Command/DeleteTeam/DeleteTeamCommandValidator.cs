@@ -1,7 +1,7 @@
 using FluentValidation;
 using static MatchDataManager.Domain.Common.Constants.ErrorMessages;
 
-namespace MatchDataManager.Application.Teams.Command.Delete;
+namespace MatchDataManager.Application.Teams.Command.DeleteTeam;
 
 public class DeleteTeamCommandValidator : AbstractValidator<DeleteTeamCommand>
 {

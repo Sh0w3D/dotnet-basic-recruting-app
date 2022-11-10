@@ -21,6 +21,7 @@ public class TeamConfiguration : IEntityTypeConfiguration<Team>
 
         builder.Property(p => p.CoachName)
             .IsRequired(false)
+            .HasDefaultValue(null)
             .HasMaxLength(55);
     }
 }

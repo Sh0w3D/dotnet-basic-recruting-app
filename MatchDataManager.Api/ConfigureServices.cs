@@ -1,5 +1,4 @@
-using MatchDataManager.Api.Common.Exceptions;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
+using FluentValidation.AspNetCore;
 
 namespace MatchDataManager.Api;
 
@@ -9,8 +8,6 @@ public static class ConfigureServices
     {
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
-
-        services.AddSingleton<ProblemDetailsFactory, MatchDataManagerProblemDetailsFactory>();
 
         services.AddControllers();
         return services;

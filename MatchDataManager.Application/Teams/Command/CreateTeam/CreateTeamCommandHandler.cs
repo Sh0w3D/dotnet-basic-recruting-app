@@ -1,32 +1,30 @@
-using System.Reflection.Metadata;
 using MatchDataManager.Application.Common.Interfaces.Repositories.Command;
 using MatchDataManager.Domain.Entities;
 using MediatR;
 
-namespace MatchDataManager.Application.Teams.Command.Update;
+namespace MatchDataManager.Application.Teams.Command.CreateTeam;
 
-public class UpdateTeamCommandHandler : IRequestHandler<UpdateTeamCommand>
+public class CreateTeamCommandHandler : IRequestHandler<CreateTeamCommand, Team>
 {
     private readonly ITeamCommandRepository _teamCommandRepository;
-    public UpdateTeamCommandHandler(ITeamCommandRepository teamCommandRepository)
+    public CreateTeamCommandHandler(ITeamCommandRepository teamCommandRepository)
     {
         _teamCommandRepository = teamCommandRepository;
     }
 
-    public async Task<Unit> Handle(
-        UpdateTeamCommand command,
+    public async Task<Team> Handle(
+        CreateTeamCommand command,
         CancellationToken cancellationToken
     )
     {
         var newTeam = new Team
         {
-            Id = command.Id,
             Name = command.Name,
             CoachName = command.CoachName
         };
 
-        await _teamCommandRepository.UpdateTeamAsync(newTeam, cancellationToken);
+        await _teamCommandRepository.CreateTeamAsync(newTeam, cancellationToken);
 
-        return Unit.Value;
+        return newTeam;
     }
 }

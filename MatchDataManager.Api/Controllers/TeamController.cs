@@ -1,6 +1,6 @@
-using MatchDataManager.Application.Teams.Command.Create;
-using MatchDataManager.Application.Teams.Command.Delete;
-using MatchDataManager.Application.Teams.Command.Update;
+using MatchDataManager.Application.Teams.Command.CreateTeam;
+using MatchDataManager.Application.Teams.Command.DeleteTeam;
+using MatchDataManager.Application.Teams.Command.UpdateTeam;
 using MatchDataManager.Application.Teams.Query.GetTeam;
 using MatchDataManager.Application.Teams.Query.GetTeams;
 using MatchDataManager.Contracts.Requests.Team;
@@ -13,7 +13,7 @@ namespace MatchDataManager.Api.Controllers;
 public class TeamController : ApiControllerBase
 {
     [HttpGet("{id:guid}")]
-    public async Task<IActionResult> Get(Guid id)
+    public async Task<IActionResult> GetTeamById(Guid id)
     {
         var team = await Mediator.Send(new GetTeamByIdQuery(id));
 
@@ -21,27 +21,27 @@ public class TeamController : ApiControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAllTeams()
     {
         var teams = await Mediator.Send(new GetTeamsQuery());
 
         return Ok(ToTeamResponseList(teams));
     }
     [HttpPost]
-    public async Task<IActionResult> Create(CreateTeamRequest request)
+    public async Task<IActionResult> CreateTeam(CreateTeamRequest request)
     {
         var result = await Mediator.Send(new CreateTeamCommand(
             Name: request.Name,
             CoachName: request.CoachName));
 
         return CreatedAtAction(
-            nameof(Create),
+            nameof(CreateTeam),
             new { id = result.Id },
             ToTeamResponse(result));
     }
 
     [HttpPut("{id:guid}")]
-    public async Task<IActionResult> Update(Guid id, UpdateTeamRequest request)
+    public async Task<IActionResult> UpdateTeam(Guid id, UpdateTeamRequest request)
     {
         await Mediator.Send(new UpdateTeamCommand(
             Id: id,
@@ -52,7 +52,7 @@ public class TeamController : ApiControllerBase
     }
 
     [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> Delete(Guid id)
+    public async Task<IActionResult> DeleteTeam(Guid id)
     {
         await Mediator.Send(new DeleteTeamCommand(id));
 

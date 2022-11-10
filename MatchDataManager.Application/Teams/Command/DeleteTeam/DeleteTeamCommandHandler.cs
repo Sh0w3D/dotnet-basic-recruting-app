@@ -1,7 +1,7 @@
 using MatchDataManager.Application.Common.Interfaces.Repositories.Command;
 using MediatR;
 
-namespace MatchDataManager.Application.Teams.Command.Delete;
+namespace MatchDataManager.Application.Teams.Command.DeleteTeam;
 
 public class DeleteTeamCommandHandler : IRequestHandler<DeleteTeamCommand>
 {

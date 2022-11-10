@@ -6,6 +6,16 @@ public class Team : BaseEntity
 {
     public Team() { }
 
+    public Team(string name)
+    {
+        Id = Guid.NewGuid();
+        Name = name;
+    }
+    public Team(Guid id, string name)
+    {
+        Id = id;
+        Name = name;
+    }
     public Team(string name, string coachName)
     {
         Id = Guid.NewGuid();
@@ -19,5 +29,5 @@ public class Team : BaseEntity
         CoachName = coachName;
     }
     public string Name { get; set; } = null!;
-    public string CoachName { get; set; } = null!;
+    public string? CoachName { get; set; }
 }
