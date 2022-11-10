@@ -13,9 +13,9 @@ public class UpdateLocationCommandValidator : AbstractValidator<UpdateLocationCo
         _locationQueryRepository = locationQueryRepository;
 
         RuleFor(p => p.Name)
-            .MustAsync(BeUniqueAsync).WithMessage(ErrorMessages.Validation.LocationUnique)
             .NotEmpty().WithMessage(ErrorMessages.Validation.LocationNameRequired)
-            .MaximumLength(255).WithMessage(ErrorMessages.Validation.LocationNameLength);
+            .MaximumLength(255).WithMessage(ErrorMessages.Validation.LocationNameLength)
+            .MustAsync(BeUniqueAsync).WithMessage(ErrorMessages.Validation.LocationUnique);
 
         RuleFor(p => p.City)
             .NotEmpty().WithMessage(ErrorMessages.Validation.LocationCityRequired)
