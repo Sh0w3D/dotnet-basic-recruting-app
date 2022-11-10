@@ -11,9 +11,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: Setup .NET
@@ -26,7 +24,7 @@ jobs:
       run: dotnet build --no-restore
 
   test:
-  needs: build
-  runs-on: ubuntu-latest
-  steps:
-    - run: dotnet test MatchDataManager.UnitTests/MatchDataManager.UnitTests.csproj -l "console;verbosity=normal"
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: dotnet test MatchDataManager.UnitTests/MatchDataManager.UnitTests.csproj -l "console;verbosity=normal"
