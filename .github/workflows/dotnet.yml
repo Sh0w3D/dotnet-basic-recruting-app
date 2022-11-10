@@ -22,9 +22,5 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-
-  test:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
+    -name: test
       - run: dotnet test MatchDataManager.UnitTests/MatchDataManager.UnitTests.csproj -l "console;verbosity=normal"
