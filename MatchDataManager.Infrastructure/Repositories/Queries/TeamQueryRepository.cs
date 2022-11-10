@@ -38,7 +38,7 @@ public class TeamQueryRepository : ITeamQueryRepository
         var teamEntity = await _context.Teams
             .AsNoTracking()
             .FirstOrDefaultAsync(x =>
-                    string.Equals(x.Name.Trim().ToLower(), name.Trim().ToLower()),
+                    x.Name.Trim().ToLower() == name.Trim().ToLower(),
                 cancellationToken);
 
         return teamEntity is null;

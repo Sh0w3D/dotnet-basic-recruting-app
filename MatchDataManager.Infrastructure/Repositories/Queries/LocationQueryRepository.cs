@@ -38,7 +38,7 @@ public class LocationQueryRepository : ILocationQueryRepository
         var locationEntity = await _context.Locations
             .AsNoTracking()
             .FirstOrDefaultAsync(x =>
-                    string.Equals(x.Name.Trim().ToLower(), name.Trim().ToLower()),
+                    x.Name.Trim().ToLower() == name.Trim().ToLower(),
                 cancellationToken);
 
         return locationEntity is null;
