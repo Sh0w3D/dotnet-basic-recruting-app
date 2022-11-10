@@ -18,7 +18,7 @@ public static class ConfigureServices
         IConfiguration configuration)
     {
         #region DbContext
-        var connectionString = configuration.GetConnectionString("DefaultConnection")
+        var connectionString = configuration.GetConnectionString("DefaultConnection")!
             .Replace("{dbPath}",
                 string.Concat(configuration["dbPath"], Path.DirectorySeparatorChar));
 

@@ -5,7 +5,6 @@ using MatchDataManager.Domain.Common.Constants;
 namespace MatchDataManager.Application.Locations.Command.UpdateLocation;
 public class UpdateLocationCommandValidator : AbstractValidator<UpdateLocationCommand>
 {
-
     private readonly ILocationQueryRepository _locationQueryRepository;
     public UpdateLocationCommandValidator(ILocationQueryRepository locationQueryRepository)
     {
