@@ -5,10 +5,10 @@ using MediatR;
 
 namespace MatchDataManager.Application.Common.Behavior;
 
-public class ValidationBehavior<TRequest, TResponse> :
-    IPipelineBehavior<TRequest, TResponse>
-        where TRequest : IRequest<TResponse>
-        where TResponse : class
+public class ValidationBehavior<TRequest, TResponse>
+    : IPipelineBehavior<TRequest, TResponse>
+    where TRequest : IRequest<TResponse>
+    where TResponse : notnull
 {
     private readonly IValidator<TRequest>? _validator;
 
@@ -19,36 +19,35 @@ public class ValidationBehavior<TRequest, TResponse> :
 
     public async Task<TResponse> Handle(
         TRequest request,
-        RequestHandlerDelegate<TResponse> next,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken,
+        RequestHandlerDelegate<TResponse> next)
     {
         if (_validator is null)
             return await next();
 
-        var validationResult = await _validator
-            .ValidateAsync(request, cancellationToken);
+        var result = await _validator.ValidateAsync(request, cancellationToken);
 
-        if (validationResult.IsValid)
+        if (result.IsValid)
             return await next();
 
         IDictionary<string, string[]> errors = new Dictionary<string, string[]>();
 
-        foreach (var result in validationResult.Errors)
+        foreach (var error in result.Errors)
         {
             if (result is null)
                 continue;
 
-            if (errors.Count != 0)
-                AppendErrorsToDictionary(errors, result);
+            if (errors.Count is not 0)
+                AppendErrorsToDictionary(errors, error);
             else
-                AddNewErrorToDictionary(errors, result);
+                AddNewErrorToDictionary(errors, error);
         }
 
         throw new MatchDataManagerValidationException(errors);
     }
 
     /// <summary>
-    /// Adding new Key and string array to the dictionary.
+    ///     Adding new Key and string array to the dictionary.
     /// </summary>
     /// <param name="errors"></param>
     /// <param name="result"></param>
@@ -56,12 +55,12 @@ public class ValidationBehavior<TRequest, TResponse> :
         IDictionary<string, string[]> errors,
         ValidationFailure result)
     {
-        errors.Add(result.PropertyName, new string[] { result.ErrorMessage });
+        errors.Add(result.PropertyName, new[] { result.ErrorMessage });
     }
 
     /// <summary>
-    /// Adding new Key and string array to the dictionary while the property name and error key is equals,
-    /// if the property name is not equal AddNewErrorToDictionary function is executed.
+    ///     Adding new Key and string array to the dictionary while the property name and error key is equals,
+    ///     if the property name is not equal AddNewErrorToDictionary function is executed.
     /// </summary>
     /// <param name="errors"></param>
     /// <param name="result"></param>
@@ -69,14 +68,14 @@ public class ValidationBehavior<TRequest, TResponse> :
         IDictionary<string, string[]> errors,
         ValidationFailure result)
     {
-        if (errors[result.PropertyName] is not null)
+        if (errors.ContainsKey(result.PropertyName))
             AddAdditionalErrorToProperty(errors, result);
         else
             AddNewErrorToDictionary(errors, result);
     }
 
     /// <summary>
-    /// Adding another error to the property that is having already validation error.
+    ///     Adding another error to the property that is having already validation error.
     /// </summary>
     /// <param name="errors"></param>
     /// <param name="result"></param>

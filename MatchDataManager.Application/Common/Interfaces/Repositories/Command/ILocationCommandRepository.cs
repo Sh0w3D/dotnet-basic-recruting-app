@@ -7,6 +7,7 @@ public interface ILocationCommandRepository
     Task CreateAsync(
         Location location,
         CancellationToken cancellationToken = default);
+
     Task DeleteLocationAsync(
         Guid id,
         CancellationToken cancellationToken = default);

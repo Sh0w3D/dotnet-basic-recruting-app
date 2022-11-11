@@ -6,6 +6,9 @@ namespace MatchDataManager.Application.Common.Exceptions.Shared;
 
 public class SaveToDatabaseException : Exception, IBaseException
 {
+    public SaveToDatabaseException(string? message) : base(message)
+    {
+    }
     public SaveToDatabaseException()
     {
         Message = ErrorMessages.SharedExceptions.DatabaseSaveMessage;
@@ -20,6 +23,6 @@ public class SaveToDatabaseException : Exception, IBaseException
         StatusCode = HttpStatusCode.BadRequest;
     }
 
-    public override string Message { get; }
+    public override string Message { get; } = null!;
     public HttpStatusCode StatusCode { get; }
 }

@@ -7,6 +7,7 @@ namespace MatchDataManager.Application.Locations.Command.CreateLocation;
 public class CreateLocationCommandHandler : IRequestHandler<CreateLocationCommand, Location>
 {
     private readonly ILocationCommandRepository _locationCommandRepository;
+
     public CreateLocationCommandHandler(ILocationCommandRepository locationCommandRepository)
     {
         _locationCommandRepository = locationCommandRepository;

@@ -1,4 +1,3 @@
-using System.Reflection.Metadata;
 using MatchDataManager.Application.Common.Interfaces.Repositories.Command;
 using MatchDataManager.Domain.Entities;
 using MediatR;
@@ -8,6 +7,7 @@ namespace MatchDataManager.Application.Teams.Command.UpdateTeam;
 public class UpdateTeamCommandHandler : IRequestHandler<UpdateTeamCommand>
 {
     private readonly ITeamCommandRepository _teamCommandRepository;
+
     public UpdateTeamCommandHandler(ITeamCommandRepository teamCommandRepository)
     {
         _teamCommandRepository = teamCommandRepository;

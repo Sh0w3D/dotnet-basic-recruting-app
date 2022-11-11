@@ -30,11 +30,13 @@ public class TeamQueryRepository : ITeamQueryRepository
             .ToListAsync(cancellationToken);
     }
 
+// do not use StringComparison, it brakes query!
+// using pragma warning disable to disable unnecessary problems
+#pragma warning disable RCS1155
     public async Task<bool> UniqueNameAsync(
         string name,
         CancellationToken cancellationToken = default)
     {
-        // do not user StringComparison, it brakes query!
         var teamEntity = await _context.Teams
             .AsNoTracking()
             .FirstOrDefaultAsync(x =>
@@ -43,4 +45,5 @@ public class TeamQueryRepository : ITeamQueryRepository
 
         return teamEntity is null;
     }
+#pragma warning restore RCS1155
 }

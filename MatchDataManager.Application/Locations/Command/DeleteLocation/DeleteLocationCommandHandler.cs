@@ -1,4 +1,3 @@
-using System.Reflection.Metadata;
 using MatchDataManager.Application.Common.Interfaces.Repositories.Command;
 using MediatR;
 
@@ -7,6 +6,7 @@ namespace MatchDataManager.Application.Locations.Command.DeleteLocation;
 public class DeleteLocationCommandHandler : IRequestHandler<DeleteLocationCommand>
 {
     private readonly ILocationCommandRepository _locationCommandRepository;
+
     public DeleteLocationCommandHandler(ILocationCommandRepository locationCommandRepository)
     {
         _locationCommandRepository = locationCommandRepository;

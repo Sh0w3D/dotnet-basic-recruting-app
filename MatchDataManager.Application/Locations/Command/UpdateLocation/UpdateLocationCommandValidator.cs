@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+using FluentValidation;
 using MatchDataManager.Application.Common.Interfaces.Repositories.Query;
 using MatchDataManager.Domain.Common.Constants;
 

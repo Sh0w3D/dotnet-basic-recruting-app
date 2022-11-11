@@ -4,5 +4,5 @@ using MediatR;
 namespace MatchDataManager.Application.Locations.Query.GetLocation;
 
 public record GetLocationByIdQuery(
-    Guid Id)
+        Guid Id)
     : IRequest<Location?>;

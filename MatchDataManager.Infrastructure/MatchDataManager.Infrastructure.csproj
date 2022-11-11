@@ -7,16 +7,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\MatchDataManager.Application\MatchDataManager.Application.csproj" />
-      <ProjectReference Include="..\MatchDataManager.Domain\MatchDataManager.Domain.csproj" />
+        <ProjectReference Include="..\MatchDataManager.Application\MatchDataManager.Application.csproj" />
+        <ProjectReference Include="..\MatchDataManager.Domain\MatchDataManager.Domain.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.9" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Persistence\Migrations" />
+        <Folder Include="Persistence\Migrations" />
     </ItemGroup>
 
 </Project>

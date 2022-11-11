@@ -7,6 +7,7 @@ namespace MatchDataManager.Application.Locations.Command.CreateLocation;
 public class CreateLocationCommandValidator : AbstractValidator<CreateLocationCommand>
 {
     private readonly ILocationQueryRepository _locationQueryRepository;
+
     public CreateLocationCommandValidator(ILocationQueryRepository locationQueryRepository)
     {
         _locationQueryRepository = locationQueryRepository;
