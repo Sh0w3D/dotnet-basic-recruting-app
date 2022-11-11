@@ -42,8 +42,10 @@ public class ErrorsController : ControllerBase
     {
         ModelStateDictionary modelStateDictionary = new();
         foreach (var errors in errorsDictionary.Values)
-        foreach (var error in errors)
-            modelStateDictionary.AddModelError(errorsDictionary.Keys.First(), error);
+        {
+            foreach (var error in errors)
+                modelStateDictionary.AddModelError(errorsDictionary.Keys.First(), error);
+        }
 
         return modelStateDictionary;
     }

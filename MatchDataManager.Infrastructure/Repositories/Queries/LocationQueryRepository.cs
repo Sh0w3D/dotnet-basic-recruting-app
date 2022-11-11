@@ -30,11 +30,13 @@ public class LocationQueryRepository : ILocationQueryRepository
             .ToListAsync(cancellationToken);
     }
 
+// do not use StringComparison, it brakes query!
+// using pragma warning disable to disable unnecessary problems
+#pragma warning disable RCS1155
     public async Task<bool> UniqueNameAsync(
         string name,
         CancellationToken cancellationToken = default)
     {
-        // do not use StringComparison, it brakes query!
         var locationEntity = await _context.Locations
             .AsNoTracking()
             .FirstOrDefaultAsync(x =>
@@ -43,4 +45,5 @@ public class LocationQueryRepository : ILocationQueryRepository
 
         return locationEntity is null;
     }
+#pragma warning restore RCS1155
 }

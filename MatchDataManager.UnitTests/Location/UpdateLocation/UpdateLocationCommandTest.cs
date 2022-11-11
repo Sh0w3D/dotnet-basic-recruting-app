@@ -74,7 +74,6 @@ public class UpdateLocationCommandTest
             Assert.Equal(ErrorMessages.Validation.LocationCityLength, error.ErrorMessage));
     }
 
-
     private static IEnumerable<object[]> UpdateLocationTestData()
     {
         // Location name data

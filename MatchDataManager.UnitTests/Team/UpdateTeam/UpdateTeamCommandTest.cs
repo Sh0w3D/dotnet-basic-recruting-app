@@ -74,7 +74,6 @@ public class UpdateTeamCommandTest
             Assert.Equal(ErrorMessages.Validation.TeamCoachNameLength, error.ErrorMessage));
     }
 
-
     private static IEnumerable<object[]> UpdateTeamTestData()
     {
         // Team name data

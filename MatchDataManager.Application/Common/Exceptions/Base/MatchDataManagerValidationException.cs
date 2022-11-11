@@ -12,6 +12,27 @@ public class MatchDataManagerValidationException : Exception, IBaseValidationExc
         StatusCode = HttpStatusCode.BadRequest;
     }
 
+    public MatchDataManagerValidationException() : base()
+    {
+        Message = ErrorMessages.Validation.BaseMessage;
+        Errors = null!;
+    }
+
+    public MatchDataManagerValidationException(
+        string? message) : base(message)
+    {
+        Errors = null!;
+        Message = ErrorMessages.Validation.BaseMessage;
+    }
+
+    public MatchDataManagerValidationException(
+        string? message,
+        Exception? innerException) : base(message, innerException)
+    {
+        Message = ErrorMessages.Validation.BaseMessage;
+        Errors = null!;
+    }
+
     public override string Message { get; }
     public HttpStatusCode StatusCode { get; }
     public IDictionary<string, string[]> Errors { get; }
