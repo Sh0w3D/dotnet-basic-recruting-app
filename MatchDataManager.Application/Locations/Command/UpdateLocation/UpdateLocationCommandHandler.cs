@@ -7,6 +7,7 @@ namespace MatchDataManager.Application.Locations.Command.UpdateLocation;
 public class UpdateLocationCommandHandler : IRequestHandler<UpdateLocationCommand>
 {
     private readonly ILocationCommandRepository _locationCommandRepository;
+
     public UpdateLocationCommandHandler(
         ILocationCommandRepository locationCommandRepository)
     {
@@ -26,6 +27,6 @@ public class UpdateLocationCommandHandler : IRequestHandler<UpdateLocationComman
 
         await _locationCommandRepository.UpdateLocationAsync(newLocation, cancellationToken);
 
-        return Unit.Value;
+        return await Task.FromResult(Unit.Value);
     }
 }

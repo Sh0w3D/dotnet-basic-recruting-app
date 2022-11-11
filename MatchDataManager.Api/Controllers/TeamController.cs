@@ -27,12 +27,13 @@ public class TeamController : ApiControllerBase
 
         return Ok(ToTeamResponseList(teams));
     }
+
     [HttpPost]
     public async Task<IActionResult> CreateTeam(CreateTeamRequest request)
     {
         var result = await Mediator.Send(new CreateTeamCommand(
-            Name: request.Name,
-            CoachName: request.CoachName));
+            request.Name,
+            request.CoachName));
 
         return CreatedAtAction(
             nameof(CreateTeam),
@@ -44,9 +45,9 @@ public class TeamController : ApiControllerBase
     public async Task<IActionResult> UpdateTeam(Guid id, UpdateTeamRequest request)
     {
         await Mediator.Send(new UpdateTeamCommand(
-            Id: id,
-            Name: request.Name,
-            CoachName: request.CoachName));
+            id,
+            request.Name,
+            request.CoachName));
 
         return NoContent();
     }
@@ -58,18 +59,20 @@ public class TeamController : ApiControllerBase
 
         return NoContent();
     }
+
     private static List<TeamResponse> ToTeamResponseList(List<Team> teams)
     {
         return teams.ConvertAll(team => ToTeamResponse(team)!);
     }
+
     private static TeamResponse? ToTeamResponse(Team? team)
     {
         if (team is null) return null;
 
         return new TeamResponse(
-            Id: team.Id,
-            Name: team.Name,
-            CoachName: team.CoachName
+            team.Id,
+            team.Name,
+            team.CoachName
         );
     }
 }

@@ -1,4 +1,3 @@
-using System.Linq.Expressions;
 using MatchDataManager.Application.Common.Interfaces.Repositories.Query;
 using MatchDataManager.Domain.Entities;
 using MediatR;

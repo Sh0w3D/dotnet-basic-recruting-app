@@ -34,7 +34,7 @@ public class LocationQueryRepository : ILocationQueryRepository
         string name,
         CancellationToken cancellationToken = default)
     {
-        // do not user StringComparison, it brakes query!
+        // do not use StringComparison, it brakes query!
         var locationEntity = await _context.Locations
             .AsNoTracking()
             .FirstOrDefaultAsync(x =>

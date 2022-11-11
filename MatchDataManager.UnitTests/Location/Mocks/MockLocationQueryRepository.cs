@@ -15,7 +15,7 @@ internal static class MockLocationQueryRepository
                     It.IsAny<string>(),
                     It.IsAny<CancellationToken>()))
             .ReturnsAsync(uniqueName);
-        
+
         return mockLocationQueryRepository.Object;
     }
 }

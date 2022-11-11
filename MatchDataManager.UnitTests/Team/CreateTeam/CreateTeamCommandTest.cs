@@ -27,7 +27,7 @@ public class CreateTeamCommandTest
         var validator = new CreateTeamCommandValidator(_teamQueryRepositoryUniqueTrue);
 
         var result = validator.ValidateAsync(team);
-        
+
         result.Result.Errors.ForEach(error =>
             Assert.Equal(expected, error.ErrorMessage));
     }
@@ -51,7 +51,7 @@ public class CreateTeamCommandTest
         var validator = new CreateTeamCommandValidator(_teamQueryRepositoryUniqueTrue);
 
         var result = validator.ValidateAsync(team);
-        
+
         result.Result.Errors.ForEach(error =>
             Assert.Equal(ErrorMessages.Validation.TeamNameLength, error.ErrorMessage));
     }
@@ -70,11 +70,20 @@ public class CreateTeamCommandTest
 
     private static IEnumerable<object[]> CreateTeamTestData()
     {
-        yield return new object[] { new CreateTeamCommand("", "Kamil"),
-            ErrorMessages.Validation.TeamNameRequired };
-        yield return new object[] { new CreateTeamCommand(" ", "Kamil"),
-            ErrorMessages.Validation.TeamNameRequired };
-        yield return new object[] { new CreateTeamCommand(null!, "Kamil"),
-            ErrorMessages.Validation.TeamNameRequired };
+        yield return new object[]
+        {
+            new CreateTeamCommand("", "Kamil"),
+            ErrorMessages.Validation.TeamNameRequired
+        };
+        yield return new object[]
+        {
+            new CreateTeamCommand(" ", "Kamil"),
+            ErrorMessages.Validation.TeamNameRequired
+        };
+        yield return new object[]
+        {
+            new CreateTeamCommand(null!, "Kamil"),
+            ErrorMessages.Validation.TeamNameRequired
+        };
     }
 }

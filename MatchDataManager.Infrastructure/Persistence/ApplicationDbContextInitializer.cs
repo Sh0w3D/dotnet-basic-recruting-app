@@ -36,7 +36,7 @@ public class ApplicationDbContextInitializer
 
     private static void CreateDbFolder(IConfiguration configuration)
     {
-        string dirPath = string.Concat(
+        var dirPath = string.Concat(
             Environment.CurrentDirectory,
             Path.DirectorySeparatorChar,
             configuration["dbPath"]);

@@ -17,7 +17,7 @@ public class UpdateTeamCommandTest
         _teamRepositoryUniqueNameFalse = MockTeamQueryRepository.GetTeamUniqueName(false);
         _teamRepositoryUniqueNameTrue = MockTeamQueryRepository.GetTeamUniqueName(true);
     }
-    
+
     [Fact]
     public void UpdateTeamCommandValidatorShouldThrowUniqueNameIsRequired()
     {
@@ -26,7 +26,7 @@ public class UpdateTeamCommandTest
         var validator = new UpdateTeamCommandValidator(_teamRepositoryUniqueNameFalse);
 
         var result = validator.ValidateAsync(team);
-        
+
         result.Result.Errors.ForEach(error =>
             Assert.Equal(ErrorMessages.Validation.TeamNameUnique, error.ErrorMessage));
     }
@@ -40,7 +40,7 @@ public class UpdateTeamCommandTest
         var validator = new UpdateTeamCommandValidator(_teamRepositoryUniqueNameTrue);
 
         var result = validator.ValidateAsync(team);
-        result.Result.Errors.ForEach(error => 
+        result.Result.Errors.ForEach(error =>
             Assert.Equal(expected, error.ErrorMessage));
     }
 
@@ -54,11 +54,11 @@ public class UpdateTeamCommandTest
         var validator = new UpdateTeamCommandValidator(_teamRepositoryUniqueNameTrue);
 
         var result = validator.ValidateAsync(team);
-        
-        result.Result.Errors.ForEach(error => 
+
+        result.Result.Errors.ForEach(error =>
             Assert.Equal(ErrorMessages.Validation.TeamNameLength, error.ErrorMessage));
     }
-    
+
     [Fact]
     public void UpdateTeamCommandValidatorShouldThrowTooLongCoachName()
     {
@@ -69,20 +69,29 @@ public class UpdateTeamCommandTest
         var validator = new UpdateTeamCommandValidator(_teamRepositoryUniqueNameTrue);
 
         var result = validator.ValidateAsync(team);
-        
-        result.Result.Errors.ForEach(error => 
+
+        result.Result.Errors.ForEach(error =>
             Assert.Equal(ErrorMessages.Validation.TeamCoachNameLength, error.ErrorMessage));
     }
-    
-    
+
+
     private static IEnumerable<object[]> UpdateTeamTestData()
     {
         // Team name data
-        yield return new object[] { new UpdateTeamCommand(Guid.NewGuid()," ", "Rudy"),
-            ErrorMessages.Validation.TeamNameRequired };
-        yield return new object[] { new UpdateTeamCommand(Guid.NewGuid(),"", "Katowice"),
-            ErrorMessages.Validation.TeamNameRequired };
-        yield return new object[] { new UpdateTeamCommand(Guid.NewGuid(),null!, "Gliwice"),
-            ErrorMessages.Validation.TeamNameRequired };
+        yield return new object[]
+        {
+            new UpdateTeamCommand(Guid.NewGuid(), " ", "Rudy"),
+            ErrorMessages.Validation.TeamNameRequired
+        };
+        yield return new object[]
+        {
+            new UpdateTeamCommand(Guid.NewGuid(), "", "Katowice"),
+            ErrorMessages.Validation.TeamNameRequired
+        };
+        yield return new object[]
+        {
+            new UpdateTeamCommand(Guid.NewGuid(), null!, "Gliwice"),
+            ErrorMessages.Validation.TeamNameRequired
+        };
     }
 }

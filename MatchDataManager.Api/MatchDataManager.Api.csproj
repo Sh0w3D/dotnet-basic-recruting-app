@@ -7,19 +7,19 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MediatR" Version="11.0.0" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        <PackageReference Include="MediatR" Version="10.0.1" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.9">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\MatchDataManager.Application\MatchDataManager.Application.csproj" />
-      <ProjectReference Include="..\MatchDataManager.Contracts\MatchDataManager.Contracts.csproj" />
-      <ProjectReference Include="..\MatchDataManager.Domain\MatchDataManager.Domain.csproj" />
-      <ProjectReference Include="..\MatchDataManager.Infrastructure\MatchDataManager.Infrastructure.csproj" />
+        <ProjectReference Include="..\MatchDataManager.Application\MatchDataManager.Application.csproj" />
+        <ProjectReference Include="..\MatchDataManager.Contracts\MatchDataManager.Contracts.csproj" />
+        <ProjectReference Include="..\MatchDataManager.Domain\MatchDataManager.Domain.csproj" />
+        <ProjectReference Include="..\MatchDataManager.Infrastructure\MatchDataManager.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

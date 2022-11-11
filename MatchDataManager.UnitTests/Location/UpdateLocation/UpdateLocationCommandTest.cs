@@ -17,7 +17,7 @@ public class UpdateLocationCommandTest
         _locationRepositoryUniqueNameFalse = MockLocationQueryRepository.GetLocationUniqueName(false);
         _locationRepositoryUniqueNameTrue = MockLocationQueryRepository.GetLocationUniqueName(true);
     }
-    
+
     [Fact]
     public void UpdateLocationCommandValidatorShouldThrowUniqueNameIsRequired()
     {
@@ -26,7 +26,7 @@ public class UpdateLocationCommandTest
         var validator = new UpdateLocationCommandValidator(_locationRepositoryUniqueNameFalse);
 
         var result = validator.ValidateAsync(location);
-        
+
         result.Result.Errors.ForEach(error =>
             Assert.Equal(ErrorMessages.Validation.LocationUnique, error.ErrorMessage));
     }
@@ -40,7 +40,7 @@ public class UpdateLocationCommandTest
         var validator = new UpdateLocationCommandValidator(_locationRepositoryUniqueNameTrue);
 
         var result = validator.ValidateAsync(location);
-        result.Result.Errors.ForEach(error => 
+        result.Result.Errors.ForEach(error =>
             Assert.Equal(expected, error.ErrorMessage));
     }
 
@@ -54,11 +54,11 @@ public class UpdateLocationCommandTest
         var validator = new UpdateLocationCommandValidator(_locationRepositoryUniqueNameTrue);
 
         var result = validator.ValidateAsync(location);
-        
-        result.Result.Errors.ForEach(error => 
+
+        result.Result.Errors.ForEach(error =>
             Assert.Equal(ErrorMessages.Validation.LocationNameLength, error.ErrorMessage));
     }
-    
+
     [Fact]
     public void UpdateLocationCommandValidatorShouldThrowTooLongCity()
     {
@@ -69,27 +69,45 @@ public class UpdateLocationCommandTest
         var validator = new UpdateLocationCommandValidator(_locationRepositoryUniqueNameTrue);
 
         var result = validator.ValidateAsync(location);
-        
-        result.Result.Errors.ForEach(error => 
+
+        result.Result.Errors.ForEach(error =>
             Assert.Equal(ErrorMessages.Validation.LocationCityLength, error.ErrorMessage));
     }
-    
-    
+
+
     private static IEnumerable<object[]> UpdateLocationTestData()
     {
         // Location name data
-        yield return new object[] { new UpdateLocationCommand(Guid.NewGuid()," ", "Rudy"),
-            ErrorMessages.Validation.LocationNameRequired };
-        yield return new object[] { new UpdateLocationCommand(Guid.NewGuid(),"", "Katowice"),
-            ErrorMessages.Validation.LocationNameRequired };
-        yield return new object[] { new UpdateLocationCommand(Guid.NewGuid(),null!, "Gliwice"),
-            ErrorMessages.Validation.LocationNameRequired };
+        yield return new object[]
+        {
+            new UpdateLocationCommand(Guid.NewGuid(), " ", "Rudy"),
+            ErrorMessages.Validation.LocationNameRequired
+        };
+        yield return new object[]
+        {
+            new UpdateLocationCommand(Guid.NewGuid(), "", "Katowice"),
+            ErrorMessages.Validation.LocationNameRequired
+        };
+        yield return new object[]
+        {
+            new UpdateLocationCommand(Guid.NewGuid(), null!, "Gliwice"),
+            ErrorMessages.Validation.LocationNameRequired
+        };
         // Location city data
-        yield return new object[] { new UpdateLocationCommand(Guid.NewGuid(),"SRC", " "),
-            ErrorMessages.Validation.LocationCityRequired };
-        yield return new object[] { new UpdateLocationCommand(Guid.NewGuid(),"SRB", ""),
-            ErrorMessages.Validation.LocationCityRequired };
-        yield return new object[] { new UpdateLocationCommand(Guid.NewGuid(),"SR", null!),
-            ErrorMessages.Validation.LocationCityRequired };
+        yield return new object[]
+        {
+            new UpdateLocationCommand(Guid.NewGuid(), "SRC", " "),
+            ErrorMessages.Validation.LocationCityRequired
+        };
+        yield return new object[]
+        {
+            new UpdateLocationCommand(Guid.NewGuid(), "SRB", ""),
+            ErrorMessages.Validation.LocationCityRequired
+        };
+        yield return new object[]
+        {
+            new UpdateLocationCommand(Guid.NewGuid(), "SR", null!),
+            ErrorMessages.Validation.LocationCityRequired
+        };
     }
 }

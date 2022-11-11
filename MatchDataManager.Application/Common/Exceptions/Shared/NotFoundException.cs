@@ -12,7 +12,7 @@ public class NotFoundException : Exception, IBaseException
         Message = ErrorMessages.SharedExceptions.NotFoundMessage;
     }
 
-    public NotFoundException(string? message): base(message)
+    public NotFoundException(string? message) : base(message)
     {
         StatusCode = HttpStatusCode.NotFound;
         Message = message ?? ErrorMessages.SharedExceptions.NotFoundMessage;

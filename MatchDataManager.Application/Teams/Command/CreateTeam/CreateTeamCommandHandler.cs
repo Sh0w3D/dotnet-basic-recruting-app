@@ -7,6 +7,7 @@ namespace MatchDataManager.Application.Teams.Command.CreateTeam;
 public class CreateTeamCommandHandler : IRequestHandler<CreateTeamCommand, Team>
 {
     private readonly ITeamCommandRepository _teamCommandRepository;
+
     public CreateTeamCommandHandler(ITeamCommandRepository teamCommandRepository)
     {
         _teamCommandRepository = teamCommandRepository;

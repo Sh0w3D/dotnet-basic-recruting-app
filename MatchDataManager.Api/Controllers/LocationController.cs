@@ -1,12 +1,12 @@
 using MatchDataManager.Application.Locations.Command.CreateLocation;
+using MatchDataManager.Application.Locations.Command.DeleteLocation;
+using MatchDataManager.Application.Locations.Command.UpdateLocation;
 using MatchDataManager.Application.Locations.Query.GetLocation;
 using MatchDataManager.Application.Locations.Query.GetLocations;
 using MatchDataManager.Contracts.Requests.Location;
+using MatchDataManager.Contracts.Responses;
 using MatchDataManager.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
-using MatchDataManager.Contracts.Responses;
-using MatchDataManager.Application.Locations.Command.UpdateLocation;
-using MatchDataManager.Application.Locations.Command.DeleteLocation;
 
 namespace MatchDataManager.Api.Controllers;
 
@@ -32,8 +32,8 @@ public class LocationController : ApiControllerBase
     public async Task<IActionResult> CreateLocation(CreateLocationRequest request)
     {
         var result = await Mediator.Send(new CreateLocationCommand(
-            Name: request.Name,
-            City: request.City));
+            request.Name,
+            request.City));
 
         return CreatedAtAction(
             nameof(CreateLocation),
@@ -45,9 +45,9 @@ public class LocationController : ApiControllerBase
     public async Task<IActionResult> UpdateLocation(Guid id, UpdateLocationRequest request)
     {
         await Mediator.Send(new UpdateLocationCommand(
-            Id: id,
-            Name: request.Name,
-            City: request.City));
+            id,
+            request.Name,
+            request.City));
 
         return NoContent();
     }
@@ -64,14 +64,15 @@ public class LocationController : ApiControllerBase
     {
         return locations.ConvertAll(location => ToLocationResponse(location)!);
     }
+
     private static LocationResponse? ToLocationResponse(Location? location)
     {
         if (location is null)
             return null;
 
         return new LocationResponse(
-            Id: location.Id,
-            Name: location.Name,
-            City: location.City);
+            location.Id,
+            location.Name,
+            location.City);
     }
 }

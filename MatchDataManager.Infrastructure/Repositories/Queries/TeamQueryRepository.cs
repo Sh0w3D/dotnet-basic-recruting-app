@@ -34,7 +34,7 @@ public class TeamQueryRepository : ITeamQueryRepository
         string name,
         CancellationToken cancellationToken = default)
     {
-        // do not user StringComparison, it brakes query!
+        // do not use StringComparison, it brakes query!
         var teamEntity = await _context.Teams
             .AsNoTracking()
             .FirstOrDefaultAsync(x =>

@@ -26,8 +26,8 @@ public class CreateLocationCommandTest
         var validator = new CreateLocationCommandValidator(_locationRepositoryUniqueNameTrue);
 
         var result = validator.ValidateAsync(command);
-        
-        result.Result.Errors.ForEach(error => 
+
+        result.Result.Errors.ForEach(error =>
             Assert.Equal(expected, error.ErrorMessage));
     }
 
@@ -39,7 +39,7 @@ public class CreateLocationCommandTest
         var validator = new CreateLocationCommandValidator(_locationRepositoryUniqueNameFalse);
 
         var result = validator.ValidateAsync(location);
-        
+
         result.Result.Errors.ForEach(error =>
             Assert.Equal(Validation.LocationUnique, error.ErrorMessage));
     }
@@ -52,7 +52,7 @@ public class CreateLocationCommandTest
         var validator = new CreateLocationCommandValidator(_locationRepositoryUniqueNameTrue);
 
         var result = validator.ValidateAsync(location);
-        
+
         result.Result.Errors.ForEach(error =>
             Assert.Equal(Validation.LocationNameLength, error.ErrorMessage));
     }
@@ -65,26 +65,44 @@ public class CreateLocationCommandTest
         var validator = new CreateLocationCommandValidator(_locationRepositoryUniqueNameTrue);
 
         var result = validator.ValidateAsync(location);
-        
+
         result.Result.Errors.ForEach(error =>
             Assert.Equal(Validation.LocationCityLength, error.ErrorMessage));
     }
-    
+
     private static IEnumerable<object[]> CreateLocationTestData()
     {
         // Location name data
-        yield return new object[] { new CreateLocationCommand(" ", "Rudy"),
-            Validation.LocationNameRequired };
-        yield return new object[] { new CreateLocationCommand("", "Katowice"),
-            Validation.LocationNameRequired };
-        yield return new object[] { new CreateLocationCommand(null!, "Gliwice"),
-            Validation.LocationNameRequired };
+        yield return new object[]
+        {
+            new CreateLocationCommand(" ", "Rudy"),
+            Validation.LocationNameRequired
+        };
+        yield return new object[]
+        {
+            new CreateLocationCommand("", "Katowice"),
+            Validation.LocationNameRequired
+        };
+        yield return new object[]
+        {
+            new CreateLocationCommand(null!, "Gliwice"),
+            Validation.LocationNameRequired
+        };
         // Location city data
-        yield return new object[] { new CreateLocationCommand("SRC", " "),
-            Validation.LocationCityRequired };
-        yield return new object[] { new CreateLocationCommand("SRB", ""),
-            Validation.LocationCityRequired };
-        yield return new object[] { new CreateLocationCommand("SR", null!),
-            Validation.LocationCityRequired };
+        yield return new object[]
+        {
+            new CreateLocationCommand("SRC", " "),
+            Validation.LocationCityRequired
+        };
+        yield return new object[]
+        {
+            new CreateLocationCommand("SRB", ""),
+            Validation.LocationCityRequired
+        };
+        yield return new object[]
+        {
+            new CreateLocationCommand("SR", null!),
+            Validation.LocationCityRequired
+        };
     }
 }
