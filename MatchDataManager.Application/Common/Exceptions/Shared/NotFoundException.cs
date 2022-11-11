@@ -18,13 +18,6 @@ public class NotFoundException : Exception, IBaseException
         Message = message ?? ErrorMessages.SharedExceptions.NotFoundMessage;
     }
 
-    public NotFoundException(
-        string? message,
-        Exception? innerException) : base(message, innerException)
-    {
-        Message = ErrorMessages.SharedExceptions.NotFoundMessage;
-    }
-
     public HttpStatusCode StatusCode { get; }
     public override string Message { get; }
 }

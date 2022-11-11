@@ -12,7 +12,7 @@ public class ErrorsController : ControllerBase
     [ApiExplorerSettings(IgnoreApi = true)]
     public IActionResult Error()
     {
-        var exception = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
+        Exception? exception = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
 
         var (statusCode, message, errors) = exception switch
         {
@@ -34,17 +34,18 @@ public class ErrorsController : ControllerBase
                 statusCode: statusCode,
                 title: message)
             : ValidationProblem(
+                statusCode: statusCode,
                 title: message,
                 modelStateDictionary: CreateModelStateDictionary(errors));
     }
 
-    private static ModelStateDictionary CreateModelStateDictionary(IDictionary<string, string[]> errorsDictionary)
+    private static ModelStateDictionary CreateModelStateDictionary(IDictionary<string, string[]> errors)
     {
         ModelStateDictionary modelStateDictionary = new();
-        foreach (var errors in errorsDictionary.Values)
+
+        foreach(var (key, errorsArray) in errors)
         {
-            foreach (var error in errors)
-                modelStateDictionary.AddModelError(errorsDictionary.Keys.First(), error);
+            modelStateDictionary.AddModelError(key, errorsArray.Single());
         }
 
         return modelStateDictionary;
