@@ -1,6 +1,6 @@
 namespace MatchDataManager.Contracts.Responses;
 
-public record LocationResponse(
+public sealed record LocationResponse(
     Guid Id,
     string Name,
     string City);

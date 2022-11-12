@@ -1,6 +1,6 @@
 namespace MatchDataManager.Contracts.Responses;
 
-public record TeamResponse(
+public sealed record TeamResponse(
     Guid Id,
     string Name,
     string? CoachName);

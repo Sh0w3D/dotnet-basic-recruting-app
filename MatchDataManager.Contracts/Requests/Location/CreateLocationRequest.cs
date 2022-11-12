@@ -1,5 +1,5 @@
 namespace MatchDataManager.Contracts.Requests.Location;
 
-public record CreateLocationRequest(
-    string Name,
-    string City);
+public sealed record CreateLocationRequest(
+    string? Name,
+    string? City);

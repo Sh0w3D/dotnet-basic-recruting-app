@@ -32,11 +32,11 @@ public class TeamController : ApiControllerBase
     public async Task<IActionResult> CreateTeam(CreateTeamRequest request)
     {
         var result = await Mediator.Send(new CreateTeamCommand(
-            request.Name,
+            request.Name!,
             request.CoachName));
 
         return CreatedAtAction(
-            nameof(CreateTeam),
+            nameof(GetTeamById),
             new { id = result.Id },
             ToTeamResponse(result));
     }
@@ -46,7 +46,7 @@ public class TeamController : ApiControllerBase
     {
         await Mediator.Send(new UpdateTeamCommand(
             id,
-            request.Name,
+            request.Name!,
             request.CoachName));
 
         return NoContent();

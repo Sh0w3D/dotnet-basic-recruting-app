@@ -32,11 +32,11 @@ public class LocationController : ApiControllerBase
     public async Task<IActionResult> CreateLocation(CreateLocationRequest request)
     {
         var result = await Mediator.Send(new CreateLocationCommand(
-            request.Name,
-            request.City));
+            request.Name!,
+            request.City!));
 
         return CreatedAtAction(
-            nameof(CreateLocation),
+            nameof(GetLocationById),
             new { id = result.Id },
             ToLocationResponse(result));
     }
@@ -46,8 +46,8 @@ public class LocationController : ApiControllerBase
     {
         await Mediator.Send(new UpdateLocationCommand(
             id,
-            request.Name,
-            request.City));
+            request.Name!,
+            request.City!));
 
         return NoContent();
     }
