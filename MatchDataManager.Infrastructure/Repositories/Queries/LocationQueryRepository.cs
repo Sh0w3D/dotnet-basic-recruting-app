@@ -45,5 +45,18 @@ public class LocationQueryRepository : ILocationQueryRepository
 
         return locationEntity is null;
     }
+
+    public async Task<Location?> GetLocationByNameAsync(
+        string name,
+        CancellationToken cancellationToken = default)
+    {
+        var locationEntity = await _context.Locations
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x =>
+                    x.Name.Trim().ToLower() == name.Trim().ToLower(),
+                cancellationToken);
+
+        return locationEntity;
+    }
 #pragma warning restore RCS1155
 }

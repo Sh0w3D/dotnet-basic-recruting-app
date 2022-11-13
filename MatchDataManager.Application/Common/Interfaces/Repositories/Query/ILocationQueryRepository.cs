@@ -14,4 +14,8 @@ public interface ILocationQueryRepository
     Task<bool> UniqueNameAsync(
         string name,
         CancellationToken cancellationToken = default);
+
+    Task<Location?> GetLocationByNameAsync(
+        string name,
+        CancellationToken cancellationToken = default);
 }

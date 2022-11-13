@@ -32,8 +32,8 @@ public class LocationController : ApiControllerBase
     public async Task<IActionResult> CreateLocation(CreateLocationRequest request)
     {
         var result = await Mediator.Send(new CreateLocationCommand(
-            request.Name!,
-            request.City!));
+            request.Name ?? string.Empty,
+            request.City ?? string.Empty));
 
         return CreatedAtAction(
             nameof(GetLocationById),
@@ -46,8 +46,8 @@ public class LocationController : ApiControllerBase
     {
         await Mediator.Send(new UpdateLocationCommand(
             id,
-            request.Name!,
-            request.City!));
+            request.Name ?? string.Empty,
+            request.City ?? string.Empty));
 
         return NoContent();
     }

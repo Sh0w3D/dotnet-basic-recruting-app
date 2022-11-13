@@ -45,5 +45,17 @@ public class TeamQueryRepository : ITeamQueryRepository
 
         return teamEntity is null;
     }
+public async Task<Team?> GetTeamByNameAsync(
+        string name,
+        CancellationToken cancellationToken = default)
+    {
+        var teamEntity = await _context.Teams
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x =>
+                    x.Name.Trim().ToLower() == name.Trim().ToLower(),
+                cancellationToken);
+
+        return teamEntity;
+    }
 #pragma warning restore RCS1155
 }

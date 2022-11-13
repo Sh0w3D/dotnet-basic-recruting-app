@@ -1,3 +1,4 @@
+using MatchDataManager.Application.Common.Exceptions.Base;
 using MatchDataManager.Application.Common.Interfaces.Repositories.Command;
 using MatchDataManager.Domain.Entities;
 using MediatR;
@@ -24,7 +25,6 @@ public class UpdateLocationCommandHandler : IRequestHandler<UpdateLocationComman
             Name = command.Name,
             City = command.City
         };
-
         await _locationCommandRepository.UpdateLocationAsync(newLocation, cancellationToken);
 
         return await Task.FromResult(Unit.Value);

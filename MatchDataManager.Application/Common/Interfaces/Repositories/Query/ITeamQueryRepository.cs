@@ -14,4 +14,8 @@ public interface ITeamQueryRepository
     Task<bool> UniqueNameAsync(
         string name,
         CancellationToken cancellationToken = default);
+
+    Task<Team?> GetTeamByNameAsync(
+        string name,
+        CancellationToken cancellationToken = default);
 }
